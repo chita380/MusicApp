@@ -1,0 +1,89 @@
+<div class="search-section-container">
+    <div class="search-element">
+
+        <form class="form-inline mr-auto mb-4" #searchForm="ngForm" (ngSubmit)="onSearch()">
+          <input [(ngModel)]="searchtext" name="searchtext" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <input type="submit" class=" btn-btn btn-success" value="Search"/>
+        </form>
+
+      </div>
+</div>
+
+
+<div *ngIf='(view==true)' class="super">
+        <div class="main-container">
+          
+            <div style="text-align: left;padding: 4px;">
+                <h4 style="font-weight: 900;; padding: 4px; font-size: 60px;font-family:'Proxima Nova', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: rgba(252, 252, 252, 0.897);">Album</h4>
+            </div>
+            <br>
+            <div style="column-count: 1;">
+               
+                     
+                    
+                        <div style="padding-right: 150px;padding-right: 150px;padding-top: 40px;">
+                            <mat-card style="background-color: rgba(255, 255, 255, 0.329);columns: 5;padding: 10px;"*ngFor="let iterator of albums" >
+                                <mat-card-header style="margin: 20px;">
+                                    <mat-card-title style="padding: 7px;margin: 6px;text-align: left;">{{iterator.name}}</mat-card-title>
+                                    <mat-card-subtitle style="padding: 7px;margin: 6px;text-align: left;">{{iterator.id}}</mat-card-subtitle>
+                                </mat-card-header><br>
+                                <img style="padding: 2%;" mat-card-image src={{imageelements()}} alt="Album Photo"  height="5%">
+                                <mat-card-content>
+                                   <div style="padding: 40px; font-size: 20px;">
+                                       <div style="font-variant: small-caps;font-weight: 600;">
+                                        Label :   
+                                       </div>
+                                           <br>{{iterator.label}}
+                                       
+                                   </div>
+                                  
+                                </mat-card-content>
+                                 <div *ngIf="currentUser!=null">
+                                    
+                                    <div *ngIf="!iterator.temp">
+                                     <button (click)='favButton(iterator);iterator.temp=true' >Favourite </button> 
+                                   </div>
+                                        
+                                    
+                                </div>  
+                            </mat-card> <br>
+                        </div>
+                    
+                
+
+            </div>
+
+            <div style="text-align: left;padding: 4px;">
+                <h4 style="font-weight: 900;; font-size: 60px;font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;color: rgb(252, 252, 252);">Playlist</h4>
+            </div>
+            <div style="column-count: 1;">
+               
+                     
+                    
+                        <div style="padding-right: 150px;padding-right: 150px;padding-top: 20px;">
+                            <mat-card style="background-color: rgba(255, 255, 255, 0.329);columns: 5;padding: 10px;"*ngFor="let iterator of playlists" >
+                                <mat-card-header style="margin: 20px;">
+                                    <mat-card-title style="padding: 7px;margin: 6px;text-align: left;">{{iterator.name}}</mat-card-title>
+                                    <mat-card-subtitle style="padding: 7px;margin: 6px;text-align: left;">{{iterator.id}}</mat-card-subtitle>
+                                </mat-card-header><br>
+                                <img style="padding: 2%;" mat-card-image src={{iterator.images[0].url}} alt="Playlist Photo"  height="5%">
+                                <mat-card-content>
+                                   <div style="padding: 40px; font-size: 20px;">
+                                       <div style="font-variant: small-caps;font-weight: 600;">
+                                        Tracks :   
+                                       </div>
+                                           <br>{{iterator.trackCount}}
+                                       
+                                   </div>
+                                </mat-card-content>
+                            </mat-card> <br>
+                        </div>
+                    
+                
+
+            </div>
+
+        </div>
+
+</div>
+

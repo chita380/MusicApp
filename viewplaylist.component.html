@@ -1,0 +1,74 @@
+<p></p>
+<div class="alert alert-success" *ngIf="msg !=undefined"> {{msg}}</div>
+<div class="alert alert-danger" *ngIf="errorMsg != undefined" [innerHTML]="errorMsg">{{errorMsg}}</div>
+
+<div *ngIf='!isUpdate'>
+
+    <div class="container">
+        <div class="bg-secondary">
+            <h4 class="text-center">View PlayList Page</h4>
+            <table class="table table-info table-striped table-hover col-md-8 mx-auto mt-3">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <div *ngIf='ispresent>0'>
+                        <th colspan="2">Action</th>
+                    </div>
+
+                </tr>
+                <tr *ngFor="let pl of playlists">
+                    <td>{{pl.id}}</td>
+                    <td>{{pl.name }}</td>
+                    <td>{{pl.type}}</td>
+                    <td>{{pl.description}}</td>
+
+                    <div *ngIf='ispresent>0'>
+                        <td> <input type="button" class="btn btn-success" value='Update'
+                                (click)='viewUpdatePlaylist(pl)' /></td>
+                        <td> <input type="button" class="btn btn-danger" value='Delete' (click)='confirmdel(pl.id)' />
+                        </td>
+                    </div>
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf='isUpdate'>
+    <p></p>
+    <div class="container">
+        <div class="bg-secondary">
+
+            <h4 class="text-center">View PlayList Page</h4>
+
+            <form #AddPlayForm="ngForm" (ngSubmit)="updatePlaylist()">
+                <div>PlayList ID </div>
+                <div><input type="number" disabled name="playid" [(ngModel)]="updatePlay.id" required #plId="ngModel"
+                        class="form-control" /> </div>
+                <div class="alert alert-danger" *ngIf="plId.invalid && plId.touched">PlayList Id required.</div>
+                <div>PlayList Name </div>
+                <div><input type="text" name="playname" [(ngModel)]="updatePlay.name" required #plName="ngModel"
+                        class="form-control" /> </div>
+                <div class="alert alert-danger" *ngIf="plName.invalid && plName.touched">PlayList Name required.</div>
+                <div>PlayList Type </div>
+                <div><input type="text" name="playtype" [(ngModel)]="updatePlay.type" required #plType="ngModel"
+                        class="form-control" /> </div>
+                <div class="alert alert-danger" *ngIf="plType.invalid && plType.touched">PlayListType is required.</div>
+
+                <div>PlayList Description </div>
+                <div><input type="text" name="playdes" [(ngModel)]="updatePlay.description" required #plDes="ngModel"
+                        class="form-control" /> </div>
+                <div class="alert alert-danger" *ngIf="plDes.invalid && plDes.touched">PlayList Description required.
+                </div>
+
+
+                <div> <input type="submit" [disabled]="!AddPlayForm.valid" class="btn btn-success" /> </div>
+
+            </form>
+        </div>
+    </div>
+</div>
